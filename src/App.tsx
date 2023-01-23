@@ -5,11 +5,16 @@ import {Navbar} from "./components/Navbar/Navbar";
 import {Profile} from "./components/Profile/Profile";
 import {Dialogs} from "./components/Dialogs/Dialogs";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
+import {AllActionType, StateType} from "./redux/store";
 
-export const App = () => {
+
+type AppType = {
+    state: StateType
+    dispatch: (action: AllActionType) => void
+}
+export const App = (props: AppType) => {
+
     return (
-        <BrowserRouter>
-
         <div className="app-wrapper">
             <Header/>
             <Navbar/>
@@ -17,31 +22,18 @@ export const App = () => {
             {/*<Route path="/profile" render={ () => <Profile/>}/>*/}
 
             <Routes>
-                <Route path="*" element={<Profile />} />
-                <Route path="*" element={<Dialogs />} />
+
+                <Route path="/profile" element={
+                    <Profile posts={props.state.profilePage.posts}
+                             newPostText={props.state.profilePage.newPostText}
+                             dispatch={props.dispatch}/>}/>
+                <Route path="/dialogs" element={
+                    <Dialogs dialogs={props.state.dialogsPage.dialogs}
+                             messages={props.state.dialogsPage.messages}
+                             newMessageBody={props.state.dialogsPage.newMessageBody}
+                             dispatch={props.dispatch}/>}/>
             </Routes>
         </div>
-
-        </BrowserRouter>
     );
 }
 
-// export const App = () => {
-//     return (
-//         <BrowserRouter>
-//             <div className="app-wrapper">
-//                 {/*<Header/>*/}
-//                 {/*<Navbar/>*/}
-//                 {/*<Route path="/dialogs" render={ () => <Dialogs/>}/>*/}
-//                 {/*<Route path="/profile" render={ () => <Profile/>}/>*/}
-//                 {/*<Route path={'/dialogs'} element={<Dialogs />} />*/}
-//                 {/*<Route path={'/profile'} element={<Profile />} />*/}
-//
-//                 <Route path={'/dialogs/*'} element={<Dialogs  />} />
-//             </div>
-//         </BrowserRouter>
-//     );
-// }
-
-
-// component={Dialogs} component={Profile}
