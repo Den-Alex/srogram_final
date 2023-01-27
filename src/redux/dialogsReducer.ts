@@ -1,19 +1,33 @@
-import {AllActionType, MyPostType, StateType} from "./store";
+import {AllActionType, DialogsType, MyPostType, StateType} from "./store";
 
-export const dialogsReducer = (state: StateType, action: AllActionType): StateType => {
+const initialState: DialogsType = {
+    dialogs: [
+        {name: "Den", id: "1"},
+        {name: "Ket", id: "2"},
+        {name: "Marina", id: "3"},
+        {name: "Elena", id: "4"}
+    ],
+    messages: [
+        {id: 1, message: "H"},
+        {id: 2, message: "K"},
+        {id: 3, message: "D"}
+    ],
+    newMessageBody: ""
+}
+export const dialogsReducer = (state: DialogsType = initialState, action: AllActionType): DialogsType => {
 
     switch (action.type) {
         case "UPDATE-NEW-MESSAGE-BODY" : {
-            state.dialogsPage.newMessageBody = action.newMessageBody
-            return state
+            const newState = {...state, newMessageBody: action.newMessageBody}
+            return newState
         }
         case "SEND-MESSAGE" : {
-            const body = state.dialogsPage.newMessageBody
-            state.dialogsPage.newMessageBody = ""
-            state.dialogsPage.messages.push({id: 4, message: body})
-            return state
+            const body = state.newMessageBody
+            const newState = {...state,newMessageBody: "", messages: [...state.messages, {id: 4, message: body}]}
+            return newState
         }
-        default: return state
+        default:
+            return state
     }
 }
 export const updateNewMessageBodyAC = (newMessageBody: string) => {

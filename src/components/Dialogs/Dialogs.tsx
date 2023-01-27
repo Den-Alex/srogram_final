@@ -9,8 +9,8 @@ export type DialogsPropsType = {
     dialogs: Array<DialogType>
     messages: Array<MessagesType>
     newMessageBody: string
-    dispatch: (action: AllActionType) => void
-
+    sendMessage: () => void
+    updateNewMessageBody: (newBody: string) => void
 }
 
 export const Dialogs = (props: DialogsPropsType) => {
@@ -20,10 +20,10 @@ export const Dialogs = (props: DialogsPropsType) => {
     let newMessageBody = props.newMessageBody
 
     const onClickHandler = () => {
-        props.dispatch(sendMessageAC())
+        props.sendMessage()
     }
     const onChangeHandler = (e: ChangeEvent<HTMLTextAreaElement>) => {
-        props.dispatch(updateNewMessageBodyAC(e.currentTarget.value))
+       props.updateNewMessageBody(e.currentTarget.value)
     }
 
     return (

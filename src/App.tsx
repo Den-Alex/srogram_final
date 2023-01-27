@@ -6,11 +6,12 @@ import {Profile} from "./components/Profile/Profile";
 import {Dialogs} from "./components/Dialogs/Dialogs";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import {AllActionType, StateType} from "./redux/store";
+import {DialogsContainer} from "./components/Dialogs/DialogsContainer";
 
 
 type AppType = {
-    state: StateType
-    dispatch: (action: AllActionType) => void
+    // state: StateType
+    // dispatch: (action: AllActionType) => void
 }
 export const App = (props: AppType) => {
 
@@ -24,14 +25,9 @@ export const App = (props: AppType) => {
             <Routes>
 
                 <Route path="/profile" element={
-                    <Profile posts={props.state.profilePage.posts}
-                             newPostText={props.state.profilePage.newPostText}
-                             dispatch={props.dispatch}/>}/>
+                    <Profile/>}/>
                 <Route path="/dialogs" element={
-                    <Dialogs dialogs={props.state.dialogsPage.dialogs}
-                             messages={props.state.dialogsPage.messages}
-                             newMessageBody={props.state.dialogsPage.newMessageBody}
-                             dispatch={props.dispatch}/>}/>
+                    <DialogsContainer />}/>
             </Routes>
         </div>
     );
