@@ -1,18 +1,12 @@
 import React, {ChangeEvent} from "react";
 import s from "./MyPosts.module.css"
 import {Posts} from "./Posts/Posts";
-import {UserPropsType} from "./MyPostContainer";
+import {MyPostsPropsType} from "./MyPostContainer";
 
 
-// export type MyPostsType = {
-//     posts: Array<MyPostType>
-//     newPostText: string
-//     addPost: (newPostText: string) => void
-//     updateNewPostText: (text: string) => void
-// }
 
 
-export const MyPosts = (props: UserPropsType) => {
+export const MyPosts = (props: MyPostsPropsType) => {
     let postsElements = props.posts.map(p => <Posts key={p.id} message={p.message} likesCount={p.likesCount}/>)
 
     const addPostHandler = () => {
